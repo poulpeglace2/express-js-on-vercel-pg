@@ -19,8 +19,9 @@ app.get('/pp.png', function (req, res) {
 app.get('*', (req, res) => {
   if (["/", "/contact", "/discord", "/youtube", "/tiktok", "/chat", "/style.css"].indexOf(req.originalUrl)>-1) {
     const page = req.originalUrl === '/' ? 'index' : req.originalUrl.substring(1)
+    const type = page.substring(page.indexOf('.')>-1 ? page.indexOf('.') + 1 : 'html')
     console.log(fs.readdirSync(path.join(process.cwd(), 'public')))
-  res.type('html').status(200).send(`<!doctype html>
+  res.type('html').status(200).send(type === 'html' ? `<!doctype html>
 <html>
   <head>
     <link rel="stylesheet" href="style.css">
@@ -45,7 +46,7 @@ app.get('*', (req, res) => {
     <a href="https://vercel.com/?utm_source=noahpanchaud&amp;utm_campaign=oss" rel="external noopener noreferrer" target="_blank" title="Vercel"><img alt="Vercel" width="212" height="44" decoding="async" data-nimg="1" style="color: transparent; --darkreader-inline-color: transparent;" srcset="//discord.js.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpowered-by-vercel.e182e335.svg&amp;w=256&amp;q=75 1x, //discord.js.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpowered-by-vercel.e182e335.svg&amp;w=640&amp;q=75 2x" src="//discord.js.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpowered-by-vercel.e182e335.svg&amp;w=640&amp;q=75" data-darkreader-inline-color=""></a>
     <script src="script.js"></script>
   </body>
-</html>`)
+</html>` : fs.readFileSync(path.join(process.cwd(), 'public', page.indexOf('.')>-1 ? page : `${page}.html`})))
   } else {
     res.type('html').status(404).send(`<!doctype html>
 <html>
