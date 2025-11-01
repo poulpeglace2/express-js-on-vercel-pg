@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename)
 
 const app = express()
 app.use((req, res, next) => {
-  if (["/", "/contact", "/discord", "/youtube", "/tiktok", "/chat"].indexOf(req.originalUrl)) {
+  if (["/", "/contact", "/discord", "/youtube", "/tiktok", "/chat"].indexOf(req.originalUrl)>-1) {
   res.type('html').send(`<!doctype html>
 <html>
   <head>
