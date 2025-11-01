@@ -21,7 +21,7 @@ app.get('*', (req, res) => {
     const page = req.originalUrl === '/' ? 'index' : req.originalUrl.substring(1)
     const type = page.substring(page.indexOf('.')>-1 ? page.indexOf('.') + 1 : 'html')
     console.log(fs.readdirSync(path.join(process.cwd(), 'public')))
-  res.type('html').status(200).send(type === 'html' ? `<!doctype html>
+  res.type('html').send(type === 'html' ? `<!doctype html>
 <html>
   <head>
     <link rel="stylesheet" href="style.css">
