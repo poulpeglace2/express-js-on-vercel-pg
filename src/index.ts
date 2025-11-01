@@ -17,7 +17,7 @@ app.get('/pp.png', function (req, res) {
 })
 
 app.get('*', (req, res) => {
-  if (["/", "/contact", "/discord", "/youtube", "/tiktok", "/chat"].indexOf(req.originalUrl)>-1) {
+  if (["/", "/contact", "/discord", "/youtube", "/tiktok", "/chat", "style.css"].indexOf(req.originalUrl)>-1) {
     const page = req.originalUrl === '/' ? 'index' : req.originalUrl.substring(1)
     console.log(fs.readdirSync(path.join(process.cwd(), 'public')))
   res.type('html').status(200).send(`<!doctype html>
